@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "bsielski_value_generator"
+#require "bsielski_value_generator"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -1,6 +1,6 @@
-require "v_gen/int_gen"
-require "v_gen/float_gen"
-require "v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
+require "bsielski_v_gen/int_gen"
+require "bsielski_v_gen/float_gen"
+require "bsielski_v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
 
 RSpec.describe VGen::WhateverGen do
   describe "generated samples" do

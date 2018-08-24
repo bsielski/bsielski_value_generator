@@ -1,4 +1,4 @@
-require "v_gen/array_gen"
+require "bsielski_v_gen/array_gen"
 
 RSpec.describe "creating a two dimensional 6x6 array of zeroes" do
   subject {

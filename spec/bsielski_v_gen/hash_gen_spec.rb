@@ -1,4 +1,4 @@
-require "v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
+require "bsielski_v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
 
 RSpec.describe VGen::HashGen do
 
