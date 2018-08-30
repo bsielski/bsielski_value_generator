@@ -135,33 +135,6 @@ RSpec.describe VGen::VarWordGen do
     end
   end
 
-  context "created with word length" do
-    subject {
-      Array.new(300) {
-        described_class.new(
-          length: length
-        ).()
-      }
-    }
-    
-    context "length is 2" do
-      let (:length) { (2..2) }
-      it "has only length 2 words" do
-        only_length_2_strings = subject.all? {|str| str.length == 2}
-        expect(only_length_2_strings).to be true        
-      end
-    end
-
-    context "length is from 7 to 9" do
-      let (:length) { (7..9) }
-      it "has only length 7 to 9 words" do
-        only_length_7_to_9_strings = subject.all? do |str|
-          str.length >= 7 || str.length <= 9
-        end
-        expect(only_length_7_to_9_strings).to be true        
-      end
-    end
-  end
 
   context "created with except" do
     subject {
@@ -186,15 +159,84 @@ RSpec.describe VGen::VarWordGen do
       it "has no forbiden words" do
         has_no_exceptions = subject.none? do |str|
           str == "ee" ||
-          str == "tt" ||
-          str == "et" ||
-          str == "te" ||
-          str == "ta" ||
-          str == "at"
+            str == "tt" ||
+            str == "et" ||
+            str == "te" ||
+            str == "ta" ||
+            str == "at"
         end
         expect(has_no_exceptions).to be true        
       end
     end
+  end
 
+  2.times do
+    context "created with word size" do
+      subject {
+        described_class.new(
+          size: size
+        ).()
+      }
+
+      context "size is integer" do
+        let (:size) { Random.new.rand(0..100) }
+        it "has proper length" do
+          expect(subject.length).to eq size        
+        end
+      end
+
+      context "size is negative integer" do
+        let (:size) { Random.new.rand(-1000..-1) }
+        it "raises an exeption" do
+          expect {subject}.to raise_exception "length (size) can't be negative"        
+        end
+      end
+
+      context "size is range" do
+        let (:min) { Random.new.rand(0..100) }
+        let (:dispersion) { Random.new.rand(0..100) }
+        let (:size) { (min..(min + dispersion)) }
+        it "has proper length" do
+          expect(subject.length).to satisfy { |length|
+            size.include? length
+          }        
+        end
+      end
+    end
+  end
+
+  2.times do
+    context "created with word length" do
+      subject {
+        described_class.new(
+          length: length
+        ).()
+      }
+
+      context "length is integer" do
+        let (:length) { Random.new.rand(0..100) }
+        it "has proper length" do
+          expect(subject.length).to eq length        
+        end
+      end
+
+      context "length is negative integer" do
+        let (:length) { Random.new.rand(-1000..-1) }
+        it "raises an exeption" do
+          expect {subject}.to raise_exception "length (size) can't be negative"        
+        end
+      end
+
+      context "length is range" do
+        let (:min) { Random.new.rand(0..100) }
+        let (:dispersion) { Random.new.rand(0..100) }
+        let (:length) { (min..(min + dispersion)) }
+        it "has proper length" do
+          expect(subject.length).to satisfy { |len|
+            length.include? len
+          }        
+        end
+      end
+    end
   end
 end
