@@ -37,9 +37,9 @@ RSpec.describe VGen::ArrayGen do
         expect(only_longer_than_3).to be true
       end
 
-      it "contains only arrays shorter than 9" do
-        only_shorter_than_9 = subject.all? {|a| a.size < 9}
-        expect(only_shorter_than_9).to be true        
+      it "contains only arrays shorter than 10" do
+        only_shorter_than_10 = subject.all? {|a| a.size < 10}
+        expect(only_shorter_than_10).to be true        
       end
     end
   end
@@ -69,9 +69,9 @@ RSpec.describe VGen::ArrayGen do
       expect(only_longer_than_3).to be true
     end
 
-    it "contains only arrays shorter than 9" do
-      only_shorter_than_9 = subject.all? {|a| a.size < 9}
-      expect(only_shorter_than_9).to be true        
+    it "contains only arrays shorter than 10" do
+      only_shorter_than_10 = subject.all? {|a| a.size < 10}
+      expect(only_shorter_than_10).to be true        
     end
 
     it "contains only things from gens symbols" do
@@ -92,7 +92,7 @@ RSpec.describe VGen::ArrayGen do
         ).()
       }
     }
-
+    
     it "contains only floats" do
       only_float_arrays =  subject.all? do |arr|
         arr.all? { |e| e.is_a?(Float) }
@@ -122,6 +122,77 @@ RSpec.describe VGen::ArrayGen do
     it "contains only arrays shorter than 5" do
       only_shorter_than_5 = subject.all? {|a| a.size < 5}
       expect(only_shorter_than_5).to be true        
+    end
+  end
+
+
+  200.times do
+    context "called with custom size" do
+      subject {
+        described_class.new(
+          size: size
+        ).()
+      }
+
+      context "size is integer" do
+        let (:size) { Random.new.rand(0..100) }
+        it "has proper length" do
+          expect(subject.length).to eq size        
+        end
+      end
+
+      context "size is negative integer" do
+        let (:size) { Random.new.rand(-1000..-1) }
+        it "raises an exeption" do
+          expect {subject}.to raise_exception "length (size) can't be negative"        
+        end
+      end
+
+      context "size is range" do
+        let (:min) { Random.new.rand(0..100) }
+        let (:dispersion) { Random.new.rand(0..100) }
+        let (:size) { (min..(min + dispersion)) }
+        it "has proper length" do
+          expect(subject.length).to satisfy { |length|
+            size.include? length
+          }        
+        end
+      end
+    end
+  end
+
+  200.times do
+    context "called with custom length" do
+      subject {
+        described_class.new(
+          length: length
+        ).()
+      }
+
+      context "length is integer" do
+        let (:length) { Random.new.rand(0..100) }
+        it "has proper length" do
+          expect(subject.length).to eq length        
+        end
+      end
+
+      context "length is negative integer" do
+        let (:length) { Random.new.rand(-1000..-1) }
+        it "raises an exeption" do
+          expect {subject}.to raise_exception "length (size) can't be negative"        
+        end
+      end
+
+      context "length is range" do
+        let (:min) { Random.new.rand(0..100) }
+        let (:dispersion) { Random.new.rand(0..100) }
+        let (:length) { (min..(min + dispersion)) }
+        it "has proper length" do
+          expect(subject.length).to satisfy { |len|
+            length.include? len
+          }        
+        end
+      end
     end
   end
 end
