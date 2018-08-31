@@ -272,4 +272,74 @@ RSpec.describe VGen::HashGen do
       expect(only_shorter_than_43).to be true        
     end
   end
+
+  2.times do
+    context "called with custom size" do
+      subject {
+        described_class.new(
+          size: size
+        ).()
+      }
+
+      context "size is integer" do
+        let (:size) { Random.new.rand(0..100) }
+        it "has proper length" do
+          expect(subject.length).to eq size        
+        end
+      end
+
+      context "size is negative integer" do
+        let (:size) { Random.new.rand(-1000..-1) }
+        it "raises an exeption" do
+          expect {subject}.to raise_exception "length (size) can't be negative"        
+        end
+      end
+
+      context "size is range" do
+        let (:min) { Random.new.rand(0..100) }
+        let (:dispersion) { Random.new.rand(0..100) }
+        let (:size) { (min..(min + dispersion)) }
+        it "has proper length" do
+          expect(subject.length).to satisfy { |length|
+            size.include? length
+          }        
+        end
+      end
+    end
+  end
+
+  2.times do
+    context "called with custom length" do
+      subject {
+        described_class.new(
+          length: length
+        ).()
+      }
+
+      context "length is integer" do
+        let (:length) { Random.new.rand(0..100) }
+        it "has proper length" do
+          expect(subject.length).to eq length        
+        end
+      end
+
+      context "length is negative integer" do
+        let (:length) { Random.new.rand(-1000..-1) }
+        it "raises an exeption" do
+          expect {subject}.to raise_exception "length (size) can't be negative"        
+        end
+      end
+
+      context "length is range" do
+        let (:min) { Random.new.rand(0..100) }
+        let (:dispersion) { Random.new.rand(0..100) }
+        let (:length) { (min..(min + dispersion)) }
+        it "has proper length" do
+          expect(subject.length).to satisfy { |len|
+            length.include? len
+          }        
+        end
+      end
+    end
+  end    
 end
