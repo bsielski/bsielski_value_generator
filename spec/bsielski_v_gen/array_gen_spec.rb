@@ -195,4 +195,51 @@ RSpec.describe VGen::ArrayGen do
       end
     end
   end
+
+  10.times do
+    context "with only a few elements" do
+      subject {
+        described_class.new(
+          size: 100,
+          gens: [ proc { Random.new.rand(1..100) } ]
+        ).()
+      }
+
+      it "is not a uniqe array" do
+        expect(subject.uniq).to_not eq subject
+      end
+    end
+  end
+
+  10.times do
+    context "with only a few elements and 'uniq: false'" do
+      subject {
+        described_class.new(
+          uniq: false,
+          size: 100,
+          gens: [ proc { Random.new.rand(1..100) } ]
+        ).()
+      }
+
+      it "is not a uniqe array" do
+        expect(subject.uniq).to_not eq subject
+      end
+    end
+  end
+
+  10.times do
+    context "with only a few elements and 'uniq: true'" do
+      subject {
+        described_class.new(
+          uniq: true,
+          size: 10,
+          gens: [ proc { Random.new.rand(1..10) } ]
+        ).()
+      }
+
+      it "is a uniqe array" do
+        expect(subject.uniq).to eq subject
+      end
+    end
+  end
 end

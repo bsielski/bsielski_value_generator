@@ -1,12 +1,14 @@
 module VGen
   class ArrayGen
     def initialize(
+          uniq: false,
           min: 4,
           max: 9,
           length: nil,
           size: nil,
           gens: [ proc {Random.new.rand} ]
         )
+      @uniq = uniq
       @length = length || size || (min..max)
       @gens = gens
       @min = min
@@ -14,10 +16,18 @@ module VGen
     end
 
     def call()
-      arr = Array.new(array_length) {
-        @gens.sample
+      used_values = []
+      Array.new(array_length) {
+        loop do
+          candidate_value = @gens.sample.call
+          if used_values.include?(candidate_value)
+            next
+          else
+            used_values << candidate_value if @uniq
+            break candidate_value
+          end
+        end
       }
-      arr.map(&:call)
     end
         
     private
