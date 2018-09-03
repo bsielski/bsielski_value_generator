@@ -1,6 +1,7 @@
 module VGen
   class HashGen
     def initialize(
+          with: nil,
           min: 4,
           max: 8,
           length: nil,
@@ -8,6 +9,7 @@ module VGen
           key_gens:   [ proc {Random.new.rand(0..100)} ],
           value_gens: [ proc {Random.new.rand} ]
         )
+      @with = with
       @length = length || size || (min..max)
       @key_gens = key_gens
       @value_gens = value_gens
@@ -16,21 +18,26 @@ module VGen
     end
     
     def call()
+      with_length = 0
+      with_length = @with.length if @with
       hash = Hash[
-        Array.new(hash_length) do
+        Array.new(hash_length - with_length) do
           [
             @key_gens.sample.call,
             @value_gens.sample.call
           ]
         end
       ]
-      while hash.size < hash_length do
-        hash = hash.merge(
-          {
-            @key_gens.sample.call => @value_gens.sample.call
-          }
-        )
+      if @with
+        hash.merge!(@with)
       end
+      while hash.size < hash_length do
+        new_pair =  {
+          @key_gens.sample.call => @value_gens.sample.call
+        }
+        hash = new_pair.merge(hash)  
+      end
+      hash = hash.to_a.shuffle.to_h if @with
       hash
     end
 

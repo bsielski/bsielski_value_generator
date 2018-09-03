@@ -3,7 +3,7 @@ require "bsielski_v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
 RSpec.describe VGen::HashGen do
 
   describe "generated samples" do
-    20.times do
+    200.times do
       context "called without arguments" do
         subject { described_class.new.() }
 
@@ -53,7 +53,7 @@ RSpec.describe VGen::HashGen do
       end
     end
 
-    20.times do
+    200.times do
       context "called with custom key gens" do
         subject {
           described_class.new(
@@ -109,7 +109,7 @@ RSpec.describe VGen::HashGen do
       end
     end
 
-    20.times do
+    200.times do
       context "called with custom value gens" do
         subject {
           described_class.new(
@@ -228,7 +228,7 @@ RSpec.describe VGen::HashGen do
       end
     end
 
-    20.times do
+    200.times do
       context "called with custom size" do
         subject {
           described_class.new(
@@ -263,7 +263,7 @@ RSpec.describe VGen::HashGen do
       end
     end
 
-    20.times do
+    200.times do
       context "called with custom length" do
         subject {
           described_class.new(
@@ -298,7 +298,7 @@ RSpec.describe VGen::HashGen do
       end
     end
 
-    20.times do
+    200.times do
       context "with a few combinations of keys and relative big length" do
         subject {
           described_class.new(
@@ -315,6 +315,53 @@ RSpec.describe VGen::HashGen do
           expect(subject.length).to eq 5
         end
       end
+    end
+
+    200.times do
+      context "called with with argument" do
+        subject do
+          described_class.new(
+            key_gens: [
+              proc {
+                [
+                  :ads, :qwe, :wer,
+                  :dsde, :eewe, :eggr
+                ].sample
+              }
+            ],
+
+            length: 3,
+            with: with
+          ).()
+        end
+        let (:with) {
+          {k1 => v1, k2 => v2}
+        }
+        let (:k1) { [:ads, :qwe, :wer].sample }
+        let (:k2) { [:dsde, :eewe, :eggr].sample }
+        let (:v1) { ["hfhtf", "ddrgd", "werw"].sample }
+        let (:v2) { ["seg", "drh", "cvbc"].sample }
+        
+        it "has proper length" do
+          expect(subject.length).to eq 3
+        end
+        it "has data from hash" do
+          expect(subject[k1]).to eq v1
+        end
+        it "has data from hash" do
+          expect(subject[k2]).to eq v2
+        end
+        it "has data not from hash" do
+          expect(subject.keys).to satisfy do |keys|
+            keys.any? do |k|
+              k != k1 &&
+                k != k2 &&
+                subject[k] != v1 &&
+                subject[k] != v2
+            end
+          end
+        end
+      end   
     end
   end
 end
