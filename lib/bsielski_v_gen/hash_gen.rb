@@ -1,7 +1,7 @@
 module VGen
   class HashGen
     def initialize(
-          with: nil,
+          with: {},
           min: 4,
           max: 8,
           length: nil,
@@ -18,8 +18,7 @@ module VGen
     end
     
     def call()
-      with_length = 0
-      with_length = @with.length if @with
+      with_length = @with.length
       hash = Hash[
         Array.new(hash_length - with_length) do
           [
@@ -28,7 +27,7 @@ module VGen
           ]
         end
       ]
-      if @with
+      unless @with.empty?
         hash.merge!(@with)
       end
       while hash.size < hash_length do
@@ -37,7 +36,7 @@ module VGen
         }
         hash = new_pair.merge(hash)  
       end
-      hash = hash.to_a.shuffle.to_h if @with
+      hash = hash.to_a.shuffle.to_h unless @with.empty?
       hash
     end
 
