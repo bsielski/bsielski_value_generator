@@ -65,7 +65,7 @@ VGen::IntGen.new # => new_generator
 
 Optionally paramaters:
 
-  - ***range*** - is the range from which the number is randomly generated. Default is `(0..10)`.
+  - **_range_** - is the range from which the number is randomly generated. Default is `(0..10)`.
   
 
 #### Call
@@ -87,7 +87,7 @@ VGen::FloatGen.new # => new_generator
 
 Optionally paramaters:
 
-  - ***range*** - is the range from which the number is randomly generated. Default is `(-10..10)`.
+  - **_range_** - is the range from which the number is randomly generated. Default is `(-10..10)`.
 
 #### Call
 
@@ -109,8 +109,8 @@ VGen::LetterGen.new # => new_generator
 
 Optionally paramaters:
 
-  - ***only:*** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z").to_a + ("a".."z").to_a`.
-  - ***except:*** - an array (or range) that is substracted from ***only*** array (or range). Default is `[]`.
+  - **_only:_** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z").to_a + ("a".."z").to_a`.
+  - **_except:_** - an array (or range) that is substracted from **_only:_** array (or range). Default is `[]`.
 
 #### Call
 
@@ -132,8 +132,8 @@ VGen::LowerLetterGen.new # => new_generator
 
 Optionally paramaters:
 
-  - ***only:*** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z")` (those letters are downcased anyway by the class).
-  - ***except:*** - an array (or range) that is substracted from ***only*** array (or range). Default is `[]`.
+  - **_only:_** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z")` (those letters are downcased anyway by the class).
+  - **_except:_** - an array (or range) that is substracted from **_only:_** array (or range). Default is `[]`.
 
 #### Call
 
@@ -156,8 +156,8 @@ VGen::UpperGen.new # => new_generator
 
 Optionally paramaters:
 
-  - ***only:*** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z")`.
-  - ***except:*** - an array (or range) that is substracted from ***only*** array (or range). Default is `[]`.
+  - **_only:_** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z")`.
+  - **_except:_** - an array (or range) that is substracted from **_only:_** array (or range). Default is `[]`.
 
 #### Call
 
@@ -203,9 +203,9 @@ VGen::VarWordGen.new # => new_generator
 
 Optionally paramaters:
 
-- ***letter_gen:*** - is a generator used to creating a letters for words. Default is `VGen::TypicalLetterGen.new`.
-- ***length:*** - possible word length as a range (for random length) or an int (for fixed length).
-- ***except:*** - words forbidden to generate. Default is `[]`.
+  - **_letter_gen:_** - is a generator used to creating a letters for words. Default is `VGen::TypicalLetterGen.new`.
+  - **_length:_** - possible word length as a range (for random length) or an int (for fixed length).
+  - **_except:_** - words forbidden to generate. Default is `[]`.
 
 #### Call
 
@@ -230,7 +230,7 @@ VGen::KeywordGen.new # => new_generator
 
 Optionally paramaters:
 
-- ***word_gen:*** - is a generator used to creating a string, which is converted into a symbos. Default is `VGen::VarWordGen.new`.
+  - **_word_gen:_** - is a generator used to creating a string, which is converted into a symbos. Default is `VGen::VarWordGen.new`.
 
 #### Call
 
@@ -254,11 +254,12 @@ VGen::ArrayGen.new # => new_generator
 
 Optionally paramaters:
 
-- ***min:*** - is a minimum size of a generated arrays. Default is `4`.
-- ***max:*** - is a maximum size of a generated arrays. Default is `9`.
-- ***length:*** - possible array length as a range (for random length) or an int (for fixed length).
-- ***size:*** - alias for ***length:***.
-- ***gens:*** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
+  - **_min:_** - is a minimum size of a generated arrays. Default is `4`.
+  - **_max:_** - is a maximum size of a generated arrays. Default is `9`.
+  - **_length:_** - possible array length as a range (for random length) or an int (for fixed length).
+  - **_size:_** - alias for **_length:_**.
+  - **_gens:_** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
+  - **_uniq:_** - if truthy then generated arrays have unique elements. Default is `false`.
 
 #### Call
 
@@ -283,13 +284,13 @@ VGen::HashGen.new # => new_generator
 
 Optionally paramaters:
 
-- ***min:*** - is a minimum size of a generated hashes. Default is `4`.
-- ***max:*** - is a maximum size of a generated hashes. Default is `8`.
-- ***length:*** - possible hash length as a range (for random length) or an int (for fixed length).
-- ***size:*** - alias for ***length:***.
-- ***key_gens:*** - are generators used randomly to generate keys. Default is `[ proc {Random.new.rand(0..100)} ]`.
-- ***value_gens:*** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
-- ***with:*** - is a hash that must be included in the generated hash. In other words it is a obligatory set of key and values pairs. Default is `{}`.
+  - **_min:_** - is a minimum size of a generated hashes. Default is `4`.
+  - **_max:_** - is a maximum size of a generated hashes. Default is `8`.
+  - **_length:_** - possible hash length as a range (for random length) or an int (for fixed length).
+  - **_size:_** - alias for **_length:_**.
+  - **_key_gens:_** - are generators used randomly to generate keys. Default is `[ proc {Random.new.rand(0..100)} ]`.
+  - **_value_gens:_** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
+  - **_with:_** - is a hash that must be included in the generated hash. In other words it is a obligatory set of key and values pairs. Default is `{}`.
 
 #### Call
 
@@ -297,16 +298,9 @@ Optionally paramaters:
 VGen::HashGen.new.call # => new_array
 ```
 
-
 ## To do features
 
-- Better API
-- Some easy to use generators with default parameters
-
-## To do features
-
-- Better API
-- Some easy to use generators with default parameters
+  - Some easy to use generators with default parameters
 
 ## License
 
