@@ -45,97 +45,102 @@ int_gen = VGen::IntGen.new
 random_int = int_gen.call
 ```
 
-All generators have just one public method: `#call`.
-
+All generators have just one public method: ***#call***.
 
 
 ## API
 
 
-
-### VGen::IntGen
+### Class VGen::IntGen
 
 ```ruby
 require "v_gen/int_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new(range=(0..10)) → new_generator`
+```ruby
+VGen::IntGen.new # => new_generator
+```
 
-*range* is the range from which the number is randomly generated.
+Optionally paramaters:
 
-#### Public Instance Methods
+  - ***range*** - is the range from which the number is randomly generated. Default is `(0..10)`.
+  
 
-##### `call → new_int`
+#### Call
 
+```ruby
+VGen::IntGen.new.call # => new_int
+```
 
-
-### VGen::FloatGen
+### Class VGen::FloatGen
 
 ```ruby
 require "v_gen/float_gen"
 ```
+#### Constructor
 
-#### Class Public Methods
+```ruby
+VGen::FloatGen.new # => new_generator
+```
 
-##### `new(range=(-10..10)) → new_generator`
+Optionally paramaters:
 
-See VGen::IntGen.new for details about *range* argument.
+  - ***range*** - is the range from which the number is randomly generated. Default is `(-10..10)`.
 
-#### Public Instance Methods
+#### Call
 
-##### `call → new_float`
+```ruby
+VGen::FloatGen.new.call # => new_float
+```
 
-
-
-### VGen::LetterGen
+### Class VGen::LetterGen
 
 ```ruby
 require "v_gen/letter_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new(only: (("A".."Z").to_a + ("a".."z").to_a), except: []) → new_generator`
+```ruby
+VGen::LetterGen.new # => new_generator
+```
 
-*only* an array (or range) of objects from which one randomly chosen is returned.
+Optionally paramaters:
 
-*except* an array (or range) that is substracted from *only* array (range).
+  - ***only:*** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z").to_a + ("a".."z").to_a`.
+  - ***except:*** - an array (or range) that is substracted from ***only*** array (or range). Default is `[]`.
 
-#### Public Instance Methods
+#### Call
 
-##### `call → new_object`
+```ruby
+VGen::LetterGen.new.call # => new_letter
+```
 
-
-
-### VGen::LowerLetterGen
+### Class VGen::LowerLetterGen
 
 ```ruby
 require "v_gen/lower_letter_gen"
 ```
 
-#### Class Public Methods
-
-##### `new(only: ("A".."Z"), except: []) → new_generator`
-
-See VGen::LetterGen.new for details about *only* and *except* arguments.
-
-The object in *only* and *except* arrays or ranges must respond to `#downcase` method.
-
-#### Public Instance Methods
-
-##### `call → new_lowercased_object`
-
-
-
-#### Example
+#### Constructor
 
 ```ruby
-lower_letter_gen = VGen::LowerLetterGen.new(only: ("A".."Z"))
-lower_letter_gen.call # => "j"
-lower_letter_gen.call # => "e"
+VGen::LowerLetterGen.new # => new_generator
 ```
+
+Optionally paramaters:
+
+  - ***only:*** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z")` (those letters are downcased anyway by the class).
+  - ***except:*** - an array (or range) that is substracted from ***only*** array (or range). Default is `[]`.
+
+#### Call
+
+```ruby
+VGen::LowerLetterGen.new.call # => new_lower_letter
+```
+
 
 ### VGen::UpperLetterGen
 
@@ -143,141 +148,154 @@ lower_letter_gen.call # => "e"
 require "v_gen/upper_letter_gen"
 ```
 
-#### Class Public Methods
-
-##### `new(only: ("A".."Z"), except: []) → new_generator`
-
-See VGen::LetterGen.new for details about *only* and *except* arguments.
-
-The object in *only* and *except* arrays or ranges must respond to `#upcase` method.
-
-#### Public Instance Methods
-
-##### `call → new_uppercased_object`
-
-#### Example
+#### Constructor
 
 ```ruby
-upper_letter_gen = VGen::UpperLetterGen.new(only: ("A".."Z"))
-upper_letter_gen.call # => "I"
-upper_letter_gen.call # => "D"
+VGen::UpperGen.new # => new_generator
+```
+
+Optionally paramaters:
+
+  - ***only:*** - an array (or range) of objects from which one randomly chosen is returned. Default is `("A".."Z")`.
+  - ***except:*** - an array (or range) that is substracted from ***only*** array (or range). Default is `[]`.
+
+#### Call
+
+```ruby
+VGen::UpperLetterGen.new.call # => new_upper_letter
 ```
 
 
+### Class VGen::TypicalLetterGen
 
-### VGen::TypicalLetterGen
+This generator returns random lower letters with with taking into account the frequency of occurrence in English language.
 
 ```ruby
 require "v_gen/typical_letter_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new → new_generator`
+```ruby
+VGen::TypicalLetterGen.new # => new_generator
+```
 
-#### Public Instance Methods
+#### Call
 
-##### `call → new_letter`
+```ruby
+VGen::TypicalLetterGen.new.call # => new_letter
+```
 
-It returns a random lowercased letter with taking into account the frequency of occurrence in English language.
 
+### Class VGen::VarWordGen
 
-
-### VGen::VarWordGen
+This generator returns random lowercased strings sometimes with underscore in the middle of the string.
 
 ```ruby
 require "v_gen/var_word_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new(letter_gen: TypicalLetterGen.new, lenght: (4..9), except: []) → new_generator`
+```ruby
+VGen::VarWordGen.new # => new_generator
+```
 
-*letter_gen* is a generator used to creating a letters for words.
+Optionally paramaters:
 
-*length* possible word length as a range.
+- ***letter_gen:*** - is a generator used to creating a letters for words. Default is `VGen::TypicalLetterGen.new`.
+- ***length:*** - possible word length as a range (for random length) or an int (for fixed length).
+- ***except:*** - words forbidden to generate. Default is `[]`.
 
-*except* words forbidden to generate.
+#### Call
 
-#### Public Instance Methods
-
-##### `call(lenght: (4..9), except: []) → new_random_word`
-
-It returns a random lowercased word sometimes with underscore in the middle.
+```ruby
+VGen::VarWordGen.new.call # => new_word
+```
 
 
+### Class VGen::KeywordGen
 
-### VGen::KeywordGen
+This generator returns random lowercased symbols sometimes with underscore in the middle of the string.
 
 ```ruby
 require "v_gen/keyword_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new(word_gen: VarWordGen.new) → new_generator`
+```ruby
+VGen::KeywordGen.new # => new_generator
+```
 
-*word_gen* is a generator used to creating a word that will be converted to a symbol.
+Optionally paramaters:
 
-#### Public Instance Methods
+- ***word_gen:*** - is a generator used to creating a string, which is converted into a symbos. Default is `VGen::VarWordGen.new`.
 
-##### `call → new_random_word`
+#### Call
 
-It returns a random lowercased word sometimes with underscore in the middle.
+```ruby
+VGen::KeywordGen.new.call # => new_keyword
+```
 
+### Class VGen::ArrayGen
 
-
-### VGen::ArrayGen
+This generator returns an array of random values.
 
 ```ruby
 require "v_gen/array_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new(min: 4, max: 8, gens: [proc {Random.new.rand}]) → new_generator`
+```ruby
+VGen::ArrayGen.new # => new_generator
+```
 
-*min* is a minimum size of a generated arrays.
+Optionally paramaters:
 
-*max* is a maximum size of a generated arrays.
+- ***min:*** - is a minimum size of a generated arrays. Default is `4`.
+- ***max:*** - is a maximum size of a generated arrays. Default is `9`.
+- ***length:*** - possible array length as a range (for random length) or an int (for fixed length).
+- ***size:*** - alias for ***length:***.
+- ***gens:*** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
 
-*gens* are generators used randomly to generate values.
+#### Call
 
-#### Public Instance Methods
-
-##### `call → new_random_word`
-
-It returns an array of  random values.
+```ruby
+VGen::ArrayGen.new.call # => new_array
+```
 
 
+### Class VGen::HashGen
 
-### VGen::HashGen
+This generator returns a hash of random keys and values.
 
 ```ruby
 require "v_gen/hash_gen"
 ```
 
-#### Class Public Methods
+#### Constructor
 
-##### `new(min: 4, max: 8, key_gens: [proc {Random.new.rand(0..100)}], value_gens: [proc {Random.new.rand}]) → new_generator`
+```ruby
+VGen::HashGen.new # => new_generator
+```
 
-*min* is a minimum size of a generated arrays.
+Optionally paramaters:
 
-*max* is a maximum size of a generated arrays.
+- ***min:*** - is a minimum size of a generated hashes. Default is `4`.
+- ***max:*** - is a maximum size of a generated hashes. Default is `8`.
+- ***length:*** - possible hash length as a range (for random length) or an int (for fixed length).
+- ***size:*** - alias for ***length:***.
+- ***key_gens:*** - are generators used randomly to generate keys. Default is `[ proc {Random.new.rand(0..100)} ]`.
+- ***value_gens:*** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
+- ***with:*** - is a hash that must be included in the generated hash. In other words it is a obligatory set of key and values pairs. Default is `{}`.
 
-*key_gens* are generators used randomly to generate keys.
+#### Call
 
-*value_gens* are generators used randomly to generate values.
-
-#### Public Instance Methods
-
-##### `call → new_random_word`
-
-It returns a hash of random keys and values.
-
-
-
-
+```ruby
+VGen::HashGen.new.call # => new_array
+```
 
 
 ## To do features
