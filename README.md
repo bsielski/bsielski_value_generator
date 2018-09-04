@@ -298,6 +298,32 @@ Optionally paramaters:
 VGen::HashGen.new.call # => new_array
 ```
 
+
+### Class VGen::WhateverGen
+
+This generator returns one value.
+
+```ruby
+require "bsielski_v_gen/int_gen"
+```
+
+#### Constructor
+
+```ruby
+VGen::WhateverGen.new # => new_generator
+```
+
+Optionally paramaters:
+
+  - **_gens:_** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
+
+#### Call
+
+```ruby
+VGen::WhateverGen.new.call # => new_array
+```
+
+
 ## To do features
 
   - Some easy to use generators with default parameters
