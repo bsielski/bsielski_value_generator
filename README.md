@@ -1,3 +1,4 @@
+
 # bsielski Value Generator
 
 This gem can:
@@ -257,7 +258,6 @@ Optionally paramaters:
   - **_min:_** - is a minimum size of a generated arrays. Default is `4`.
   - **_max:_** - is a maximum size of a generated arrays. Default is `9`.
   - **_length:_** - possible array length as a range (for random length) or an int (for fixed length).
-  - **_size:_** - alias for **_length:_**.
   - **_gens:_** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
   - **_uniq:_** - if truthy then generated arrays have unique elements. Default is `false`.
 
@@ -287,7 +287,6 @@ Optionally paramaters:
   - **_min:_** - is a minimum size of a generated hashes. Default is `4`.
   - **_max:_** - is a maximum size of a generated hashes. Default is `8`.
   - **_length:_** - possible hash length as a range (for random length) or an int (for fixed length).
-  - **_size:_** - alias for **_length:_**.
   - **_key_gens:_** - are generators used randomly to generate keys. Default is `[ proc {Random.new.rand(0..100)} ]`.
   - **_value_gens:_** - are generators used randomly to generate values. Default is `[ proc {Random.new.rand} ]`.
   - **_with:_** - is a hash that must be included in the generated hash. In other words it is a obligatory set of key and values pairs. Default is `{}`.
