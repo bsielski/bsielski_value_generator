@@ -349,6 +349,10 @@ VGen::WhateverGen.new.call # => new_array
 ```
 
 
+## Examples
+
+Check "examples" folder.
+
 ## To do features
 
   - Some easy to use generators with default parameters
