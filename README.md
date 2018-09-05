@@ -187,6 +187,32 @@ VGen::TypicalLetterGen.new # => new_generator
 VGen::TypicalLetterGen.new.call # => new_letter
 ```
 
+### Class VGen::StringGen
+
+This generator returns random strings.
+
+```ruby
+require "v_gen/string_gen"
+```
+
+#### Constructor
+
+```ruby
+VGen::StringGen.new # => new_generator
+```
+
+Optionally paramaters:
+
+  - **_char_gen:_** - is a generator used to creating a characters for strings. Default is `VGen::LetterGen.new`.
+  - **_length:_** - possible string length as a range (for random length) or an int (for fixed length).
+  - **_except:_** - strings forbidden to generate. Default is `[]`.
+
+#### Call
+
+```ruby
+VGen::StringGen.new.call # => new_string
+```
+
 
 ### Class VGen::VarWordGen
 
