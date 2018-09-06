@@ -1,9 +1,9 @@
-require "bsielski_v_gen/array_gen"
-require "bsielski_v_gen/int_gen"
-require "bsielski_v_gen/float_gen"
-require "bsielski_v_gen/var_word_gen"
-require "bsielski_v_gen/keyword_gen"
-require "bsielski_v_gen/whatever_gen"
+require "v_gen/array_gen"
+require "v_gen/int_gen"
+require "v_gen/float_gen"
+require "v_gen/var_word_gen"
+require "v_gen/keyword_gen"
+require "v_gen/whatever_gen"
 
 RSpec.describe "creating an array that can be 2 level deep" do
   subject (:samples) {

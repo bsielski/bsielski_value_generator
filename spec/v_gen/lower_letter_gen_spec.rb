@@ -1,6 +1,6 @@
-require "bsielski_v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
+require "v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
 
-RSpec.describe VGen::UpperLetterGen do
+RSpec.describe VGen::LowerLetterGen do
 
   context "called without arguments" do
     subject {
@@ -16,8 +16,8 @@ RSpec.describe VGen::UpperLetterGen do
         expect(subject.size).to eq 1
       end
       
-      it "is some upper case letter" do
-        expect(("A".."Z")).to include(subject)
+      it "is some lower letter" do
+        expect(("a".."z")).to include(subject)
       end
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe VGen::UpperLetterGen do
         except: exceptions
       ).()
     }
-    let (:exceptions) { ("A".."Z").to_a.sample(15) }
+    let (:exceptions) { ("a".."z").to_a.sample(15) }
 
     30.times do
       it "is an string" do
@@ -39,8 +39,8 @@ RSpec.describe VGen::UpperLetterGen do
         expect(subject.size).to eq 1
       end
       
-      it "is some upper case letter" do
-        expect(("A".."Z")).to include(subject)
+      it "is some lower letter" do
+        expect(("a".."z")).to include(subject)
       end
       
       it "has not any exceptions" do
@@ -55,7 +55,7 @@ RSpec.describe VGen::UpperLetterGen do
         only: allowed
       ).()
     }
-    let (:allowed) { ("A".."Z").to_a.sample(10) }
+    let (:allowed) { ("a".."z").to_a.sample(10) }
 
     30.times do
       it "is an string" do
@@ -66,8 +66,8 @@ RSpec.describe VGen::UpperLetterGen do
         expect(subject.size).to eq 1
       end
       
-      it "is some upper case letter" do
-        expect(("A".."Z")).to include(subject)
+      it "is some lower letter" do
+        expect(("a".."z")).to include(subject)
       end
       
       it "has only letters that are allowed" do
@@ -83,8 +83,8 @@ RSpec.describe VGen::UpperLetterGen do
         except: exceptions
       ).()
     }
-    let (:allowed) { ("A".."Z").to_a.sample(20) }
-    let (:exceptions) { ("A".."Z").to_a.sample(20) }
+    let (:allowed) { ("a".."z").to_a.sample(20) }
+    let (:exceptions) { ("a".."z").to_a.sample(20) }
 
     30.times do
       it "is an string" do
@@ -95,8 +95,8 @@ RSpec.describe VGen::UpperLetterGen do
         expect(subject.size).to eq 1
       end
       
-      it "is some upper case letter" do
-        expect(("A".."Z")).to include(subject)
+      it "is some lower letter" do
+        expect(("a".."z")).to include(subject)
       end
       
       it "has only letters that are allowed" do

@@ -1,12 +1,12 @@
-require_relative "../lib/bsielski_v_gen/letter_gen"
-require_relative "../lib/bsielski_v_gen/string_gen"
-require_relative "../lib/bsielski_v_gen/array_gen"
-require_relative "../lib/bsielski_v_gen/hash_gen"
-require_relative "../lib/bsielski_v_gen/int_gen"
-require_relative "../lib/bsielski_v_gen/float_gen"
-require_relative "../lib/bsielski_v_gen/var_word_gen"
-require_relative "../lib/bsielski_v_gen/keyword_gen"
-require_relative "../lib/bsielski_v_gen/whatever_gen"
+require_relative "../lib/v_gen/letter_gen"
+require_relative "../lib/v_gen/string_gen"
+require_relative "../lib/v_gen/array_gen"
+require_relative "../lib/v_gen/hash_gen"
+require_relative "../lib/v_gen/int_gen"
+require_relative "../lib/v_gen/float_gen"
+require_relative "../lib/v_gen/var_word_gen"
+require_relative "../lib/v_gen/keyword_gen"
+require_relative "../lib/v_gen/whatever_gen"
 
 number_of = 3
 

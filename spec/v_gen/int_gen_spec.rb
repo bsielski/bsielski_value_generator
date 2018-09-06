@@ -1,6 +1,6 @@
-require "bsielski_v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
+require "v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
 
-RSpec.describe VGen::FloatGen do
+RSpec.describe VGen::IntGen do
 
   context "called without arguments" do
     subject {
@@ -8,12 +8,12 @@ RSpec.describe VGen::FloatGen do
       ).()
     }
     30.times do
-      it "is an float" do
-        expect(subject).to be_a Float
+      it "is an int" do
+        expect(subject).to be_a Integer
       end
       
       it "is >= 0" do
-        expect(subject).to be >= -10
+        expect(subject).to be >= 0
       end
 
       it "is <= 10" do
@@ -31,7 +31,7 @@ RSpec.describe VGen::FloatGen do
     let (:range) {(min..max)}
     let (:min) {
       range = (
-        -1_000_000_000..1_000_000_000
+        -1_000_000_000_000..1_000_000_000_000
       )
       Random.new.rand(range)
     }
@@ -43,8 +43,8 @@ RSpec.describe VGen::FloatGen do
     }
 
     30.times do
-      it "is an float" do
-        expect(subject).to be_a Float
+      it "is an int" do
+        expect(subject).to be_a Integer
       end
       
       it "is >= min from range" do
@@ -66,7 +66,7 @@ RSpec.describe VGen::FloatGen do
     let (:range) {(min..max)}
     let (:min) {
       range = (
-        -1_000_000_000..1_000_000_000
+        -1_000_000_000_000..1_000_000_000_000
       )
       Random.new.rand(range)
     }
@@ -78,8 +78,8 @@ RSpec.describe VGen::FloatGen do
     }
 
     30.times do
-      it "is an float" do
-        expect(subject).to be_a Float
+      it "is an int" do
+        expect(subject).to be_a Integer
       end
       
       it "is >= min from range" do

@@ -2,7 +2,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "bsielski_v_gen/version"
+require "v_gen/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "bsielski_value_generator"

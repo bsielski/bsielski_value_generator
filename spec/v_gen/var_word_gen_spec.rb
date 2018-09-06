@@ -1,5 +1,5 @@
-require "bsielski_v_gen/lower_letter_gen"
-require "bsielski_v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
+require "v_gen/lower_letter_gen"
+require "v_gen/#{File.basename(__FILE__).chomp("_spec.rb")}"
 
 RSpec.describe VGen::VarWordGen do
 
