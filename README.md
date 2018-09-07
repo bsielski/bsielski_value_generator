@@ -187,6 +187,37 @@ VGen::TypicalLetterGen.new # => new_generator
 VGen::TypicalLetterGen.new.call # => new_letter
 ```
 
+### Class VGen::CharGen
+
+```ruby
+require "v_gen/char_gen"
+```
+
+#### Constructor
+
+```ruby
+VGen::CharGen.new # => new_generator
+```
+
+Optionally paramaters:
+
+  - **_only:_** - an array (or range) of objects from which one randomly chosen is returned. Default is:
+```
+  [
+    "`", "~", "!", "@", "#", "$", "%", "^", "&",
+	"*", "(", ")", "-", "_", "+", "=", "[", "{",
+	"]", "}", "\\", "|", ";", ":", "'", "\"", "<",
+	",", ">", ".", "?", "/", " "
+  ] + ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+```
+  - **_except:_** - an array (or range) that is substracted from **_only:_** array (or range). Default is `[]`.
+
+#### Call
+
+```ruby
+VGen::CharGen.new.call # => new_char
+```
+
 ### Class VGen::StringGen
 
 This generator returns random strings.
